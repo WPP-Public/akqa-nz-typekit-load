@@ -9,15 +9,8 @@
  * @version 0.1.0
  */
 
-// AMD or browser wrapper module format wrapper
-( function( root, factory ) {
-	if ( typeof define === 'function' && define.amd ) {
-		define( [ 'async-load', 'dom-class' ], factory );
-	} else {
-		root.DomClass = factory( root.asyncLoad, root.DomClass );
-	}
-}( this, function( load, DomClass ) {
-	'use strict';
+(function(define) { 'use strict';
+define( [ 'async-load', 'dom-class' ], function( load, DomClass ) {
 
 	var TYPEKIT_URL = '//use.typekit.com/{ID}.js',
 		messages = [ 'wf-loading', 'wf-firstload', 'wf-inactive' ],
@@ -75,4 +68,10 @@
 			}
 		);
 	};
-} ) );
+
+} );
+} )( typeof define == 'function'
+	? define
+	: function( deps, factory ) { ( this.typekitLoad = factory( this.asyncLoad, root.DomClass ) ); }
+	// Boilerplate for AMD, and browser global
+);
