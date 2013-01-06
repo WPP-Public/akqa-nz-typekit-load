@@ -16,8 +16,10 @@
 
 	head = new DomClass( document.documentElement );
 
+	/**
+	 * On succesful download on typekit file, try to load font
+	 */
 	success = function() {
-		// Try loading typekit
 		try {
 			window.Typekit.load( { active: finished, inactive: error } );
 		} catch( e ) {
@@ -25,36 +27,42 @@
 		}
 	};
 
+	/**
+	 * On errored state, cleanup and set error class
+	 */
 	error = function() {
-		// Set finsihed
 		finished();
-
-		// Add error class
 		head.add( messages[ 2 ] );
 	};
 
+	/**
+	 * Clean up loading states on both success and failure
+	 */
 	finished = function() {
-		// Set loaded
 		loading -= 1;
-
-		// Remove loading class
-		if ( !loading ) { head.remove( messages[ 0 ] ); }
-
-		// Remove first load class
 		head.remove( messages[ 1 ] );
+		if ( !loading ) { head.remove( messages[ 0 ] ); }
 	};
 
-	return function( typekit_id ) {
-
-		// Add loading class
-		head.add( messages[ 0 ] );
-
-		// Add first load class
-		if ( first_load ) { head.add( messages[ 1 ] ); }
-
+	/**
+	 * Download and initialise a typekit font(s) based on a typekit id
+	 * @param  {String} typekit_id Id of typekit font set to initialise
+	 * @param {Function} cb Success callback
+	 * @param {Fuction} er Error callback
+	 */
+	return function( typekit_id, cb, er ) {
 		loading += 1;
-
-		// Load typekit
-		load( TYPEKIT_URL.replace( '{ID}', typekit_id ), success, error );
+		head.add( messages[ 0 ] );
+		if ( first_load ) { head.add( messages[ 1 ] ); }
+		load( TYPEKIT_URL.replace( '{ID}', typekit_id ),
+			function() {
+				success();
+				if ( cb ) { cb(); }
+			},
+			function() {
+				error();
+				if ( er ) { er(); }
+			}
+		);
 	};
 } ) );
