@@ -1,0 +1,11 @@
+{
+  "name": "typekit-load",
+  "title": "Typekit loader",
+  "description": "An extremely miminal typekit loader",
+  "version": "0.0.0",
+  "main": [ "load.js" ],
+  "dependencies": {
+    "async-load": "*",
+    "dom-class": "*"
+  }
+}
