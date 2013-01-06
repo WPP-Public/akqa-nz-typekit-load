@@ -1,5 +1,15 @@
+/** @license MIT License (c) copyright Heyday Digital */
 
-// AMD or browser wrapper for module format
+/**
+ * An extremely miminal typekit loader
+ *
+ * Licensed under the MIT License at:
+ * http://heyday.mit-license.org/
+ *
+ * @version 0.1.0
+ */
+
+// AMD or browser wrapper module format wrapper
 ( function( root, factory ) {
 	if ( typeof define === 'function' && define.amd ) {
 		define( [ 'async-load', 'dom-class' ], factory );

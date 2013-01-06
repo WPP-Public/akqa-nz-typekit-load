@@ -1,4 +1,4 @@
-dom-class
+Typekit-load
 ============
 
-An extremely miminal DOM element class manipulator
+An extremely miminal typekit loader
