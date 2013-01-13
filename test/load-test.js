@@ -14,6 +14,13 @@ define( [ 'buster', '../load' ], function( buster, typekitLoad ) {
 		before( function() {
 			typekitLoad._first = true;
 			typekitLoad._loading = 0;
+			this.loader = this.stub( window._loadMock, 'load' );
+			this.domclassAdd = this.spy( window._domClassMock, 'add' );
+			this.domclassRemove = this.spy( window._domClassMock, 'remove' );
+			window.Typekit = {
+				load: function( obj ) {}
+			};
+			this.runtypekit = this.stub( window.Typekit, 'load' );
 		} );
 
 		it( 'is defined', function() {
@@ -22,12 +29,6 @@ define( [ 'buster', '../load' ], function( buster, typekitLoad ) {
 		} );
 
 		describe( 'Initialize loading', function() {
-			before( function() {
-				this.loader = this.spy( window._loadMock, 'load' );
-				this.domclassAdd = this.spy( window._domClassMock, 'add' );
-				this.domclassRemove = this.spy( window._domClassMock, 'remove' );
-			} );
-
 			it( 'increments loading counter', function() {
 				typekitLoad( '1a' ); // First load
 				expect( typekitLoad._loading ).toBe( 1 );
@@ -66,14 +67,7 @@ define( [ 'buster', '../load' ], function( buster, typekitLoad ) {
 
 		describe( 'Finish', function() {
 			before( function() {
-				this.loader = this.stub( window._loadMock, 'load' );
-				this.domclassAdd = this.spy( window._domClassMock, 'add' );
-				this.domclassRemove = this.spy( window._domClassMock, 'remove' );
-				window.Typekit = {
-					load: function( obj ) {
-						obj.active();
-					}
-				};
+				this.runtypekit.yieldsTo( 'active' );
 			} );
 			
 			it( 'decrements loading counter once', function() {
@@ -133,14 +127,7 @@ define( [ 'buster', '../load' ], function( buster, typekitLoad ) {
 
 		describe( 'Success', function() {
 			before( function() {
-				this.loader = this.stub( window._loadMock, 'load' );
-				this.domclassAdd = this.spy( window._domClassMock, 'add' );
-				this.domclassRemove = this.spy( window._domClassMock, 'remove' );
-				window.Typekit = {
-					load: function( obj ) {
-						obj.active();
-					}
-				};
+				this.runtypekit.yieldsTo( 'active' );
 			} );
 			
 			it( 'calls success function on next event loop', function( done ) {
@@ -160,18 +147,6 @@ define( [ 'buster', '../load' ], function( buster, typekitLoad ) {
 		} );
 
 		describe( 'Error', function() {
-			before( function() {
-				this.loader = this.stub( window._loadMock, 'load' );
-				this.domclassAdd = this.spy( window._domClassMock, 'add' );
-				this.domclassRemove = this.spy( window._domClassMock, 'remove' );
-				this.success = this.spy();
-				this.error = this.spy();
-				window.Typekit = {
-					load: function( obj ) {}
-				};
-				this.runtypekit = this.stub( window.Typekit, 'load' );
-			} );
-			
 			it( 'adds error class', function() {
 				typekitLoad( '1a' );
 
