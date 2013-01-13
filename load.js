@@ -13,10 +13,18 @@
 ( function( define ) { 'use strict';
 define( [ 'async-load', 'dom-class' ], function( load, domClass ) {
 
-	var messages = [ 'wf-loading', 'wf-firstload', 'wf-inactive' ],
-		head, finished,
-		typekitLoad;
+	var messages, head, finished, typekitLoad;
 
+	/**
+	 * Classes to be added to the document element
+	 * @type {Array}
+	 */
+	messages = [ 'wf-loading', 'wf-firstload', 'wf-inactive' ];
+
+	/**
+	 * Dom class manipulator wrapping the document element
+	 * @type {DOMClass}
+	 */
 	head = domClass( document.documentElement );
 
 	/**
@@ -49,11 +57,8 @@ define( [ 'async-load', 'dom-class' ], function( load, domClass ) {
 			finished();
 
 			// Break try catch scope so it doesn't suppress errors
-			if ( success ) {
-				setTimeout( success, 0 );
-			}
+			if ( success ) { setTimeout( success, 0 ); }
 		};
-
 
 		/**
 		 * On errored state, cleanup and set error class
@@ -64,10 +69,19 @@ define( [ 'async-load', 'dom-class' ], function( load, domClass ) {
 			if ( error ) { error(); }
 		};
 
-		load( '//use.typekit.com/' + typekit_id + '.js',
+		/**
+		 * Initalize loading of JS file, wait for callback
+		 */
+		load(
+			'//use.typekit.com/' + typekit_id + '.js',
 			function() {
 				try {
-					window.Typekit.load( { active: onSuccess, inactive: onError } );
+					// Call typekits global load function
+					// Will throw if not loaded
+					window.Typekit.load( {
+						active: onSuccess,
+						inactive: onError
+					} );
 				} catch( e ) {
 					onError();
 				}
@@ -76,8 +90,25 @@ define( [ 'async-load', 'dom-class' ], function( load, domClass ) {
 		);
 	};
 
+	/**
+	 * Sets whether this is the first load,
+	 * is reset to false at the end of each load
+	 * @type {Boolean}
+	 * @private
+	 */
 	typekitLoad._first = true;
+
+	/**
+	 * Interger which holds the current number of loading id's
+	 * @type {Int}
+	 * @private
+	 */
 	typekitLoad._loading = 0;
+
+	/**
+	 * Timeout value, after this period an id is set to inactive
+	 * @type {Int}
+	 */
 	typekitLoad.timeout = 2000;
 
 	return typekitLoad;
