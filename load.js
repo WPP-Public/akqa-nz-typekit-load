@@ -9,42 +9,24 @@
  * @version 0.1.0
  */
 
-(function(define) { 'use strict';
-define( [ 'async-load', 'dom-class' ], function( load, DomClass ) {
+/*jshint browser:true, laxbreak:true */
+( function( define ) { 'use strict';
+define( [ 'async-load', 'dom-class' ], function( load, domClass ) {
 
-	var TYPEKIT_URL = '//use.typekit.com/{ID}.js',
-		messages = [ 'wf-loading', 'wf-firstload', 'wf-inactive' ],
-		first_load = true, loading = 0,
-		head, success, error, finished;
+	var messages = [ 'wf-loading', 'wf-firstload', 'wf-inactive' ],
+		head, finished,
+		typekitLoad;
 
-	head = new DomClass( document.documentElement );
-
-	/**
-	 * On succesful download on typekit file, try to load font
-	 */
-	success = function() {
-		try {
-			window.Typekit.load( { active: finished, inactive: error } );
-		} catch( e ) {
-			error();
-		}
-	};
-
-	/**
-	 * On errored state, cleanup and set error class
-	 */
-	error = function() {
-		finished();
-		head.add( messages[ 2 ] );
-	};
+	head = domClass( document.documentElement );
 
 	/**
 	 * Clean up loading states on both success and failure
 	 */
 	finished = function() {
-		loading -= 1;
+		typekitLoad._loading -= 1;
+		typekitLoad._first = false;
 		head.remove( messages[ 1 ] );
-		if ( !loading ) { head.remove( messages[ 0 ] ); }
+		if ( !typekitLoad._loading ) { head.remove( messages[ 0 ] ); }
 	};
 
 	/**
@@ -53,25 +35,55 @@ define( [ 'async-load', 'dom-class' ], function( load, DomClass ) {
 	 * @param {Function} cb Success callback
 	 * @param {Fuction} er Error callback
 	 */
-	return function( typekit_id, cb, er ) {
-		loading += 1;
+	typekitLoad = function( typekit_id, success, error ) {
+		var onSuccess, onError;
+		typekitLoad._loading += 1;
 		head.add( messages[ 0 ] );
-		if ( first_load ) { head.add( messages[ 1 ] ); }
-		load( TYPEKIT_URL.replace( '{ID}', typekit_id ),
-			function() {
-				success();
-				if ( cb ) { cb(); }
-			},
-			function() {
-				error();
-				if ( er ) { er(); }
+		if ( typekitLoad._first ) { head.add( messages[ 1 ] ); }
+
+
+		/**
+		 * On success state, cleanup
+		 */
+		onSuccess = function() {
+			finished();
+
+			// Break try catch scope so it doesn't suppress errors
+			if ( success ) {
+				setTimeout( success, 0 );
 			}
+		};
+
+
+		/**
+		 * On errored state, cleanup and set error class
+		 */
+		onError = function() {
+			finished();
+			head.add( messages[ 2 ] );
+			if ( error ) { error(); }
+		};
+
+		load( '//use.typekit.com/' + typekit_id + '.js',
+			function() {
+				try {
+					window.Typekit.load( { active: onSuccess, inactive: onError } );
+				} catch( e ) {
+					onError();
+				}
+			},
+			typekitLoad.timeout
 		);
 	};
 
+	typekitLoad._first = true;
+	typekitLoad._loading = 0;
+	typekitLoad.timeout = 2000;
+
+	return typekitLoad;
 } );
 } )( typeof define == 'function'
 	? define
-	: function( deps, factory ) { this.typekitLoad = factory( this.asyncLoad, this.DomClass ); }
+	: function( deps, factory ) { this.typekitLoad = factory( this.asyncLoad, this.DOMClass ); }
 	// Boilerplate for AMD, and browser global
 );
