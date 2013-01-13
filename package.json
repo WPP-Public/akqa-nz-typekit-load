@@ -1,0 +1,37 @@
+{
+  "name": "typekit-load",
+  "version": "0.1.0",
+  "description": "An extremely miminal typekit loader",
+  "keywords": [ "typekit", "loader" ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://heyday.mit-license.org/"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/heyday/typekit-load"
+    }
+  ],
+  "bugs": "https://github.com/heyday/typekit-load/issues",
+  "maintainers": [
+    {
+      "name": "Pieter Vanderwerff"
+    }
+  ],
+  "main": [ "load.js" ],
+  "devDependencies": {
+    "buster": "~0.6",
+    "buster-amd": "git://github.com/busterjs/buster-amd.git",
+    "requirejs": "",
+    "grunt": "~0.4",
+    "grunt-contrib-jshint": "~0.1.0",
+    "grunt-plugin-buster": "~2.0.0",
+    "grunt-contrib-uglify": "~0.1.1"
+  },
+  "scripts": {
+    "test": "grunt test"
+  }
+}
