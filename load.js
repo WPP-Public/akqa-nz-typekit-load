@@ -10,7 +10,7 @@
  */
 
 /*jshint browser:true, laxbreak:true */
-( function( define ) { 'use strict';
+( function( define ) {
 define( [ 'async-load', 'dom-class' ], function( load, domClass ) {
 
 	var messages, head, finished, typekitLoad;
