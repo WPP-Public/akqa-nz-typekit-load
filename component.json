@@ -23,7 +23,7 @@
   ],
   "main": [ "load.js" ],
   "dependencies": {
-    "async-load": "*",
-    "dom-class": "*"
+    "async-load": "0.1.x",
+    "dom-class": "0.1.x"
   }
 }
