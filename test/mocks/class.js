@@ -23,6 +23,6 @@ define( 'dom-class', function() {
 } );
 } )( typeof define == 'function'
 	? define
-	: function( id, factory ) { this.DOMClass = factory(); }
+	: function( id, factory ) { this.domClass = factory(); }
 	// Boilerplate for AMD, and browser global
 );

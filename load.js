@@ -115,6 +115,6 @@ define( [ 'async-load', 'dom-class' ], function( load, domClass ) {
 } );
 } )( typeof define == 'function'
 	? define
-	: function( deps, factory ) { this.typekitLoad = factory( this.asyncLoad, this.DOMClass ); }
+	: function( deps, factory ) { this.typekitLoad = factory( this.asyncLoad, this.domClass ); }
 	// Boilerplate for AMD, and browser global
 );
