@@ -66,7 +66,7 @@ define( [ 'async-load', 'dom-class' ], function( load, domClass ) {
 		onError = function() {
 			finished();
 			head.add( messages[ 2 ] );
-			if ( error ) { error(); }
+			if ( error ) { setTimeout( error, 0 ); }
 		};
 
 		/**

@@ -157,7 +157,7 @@ define( [ 'buster', '../load' ], function( buster, typekitLoad ) {
 				expect( this.domclassAdd ).toHaveBeenCalledWith( 'wf-inactive' );
 			} );
 			
-			it( 'calls error callback on typekit load fail', function( done ) {
+			it( 'calls error function on next event loop from typekit load fail', function( done ) {
 				var success = this.spy();
 				var error = this.spy();
 				typekitLoad( '1a', success, error );
@@ -165,15 +165,14 @@ define( [ 'buster', '../load' ], function( buster, typekitLoad ) {
 				this.runtypekit.yieldsTo( 'inactive' );
 				this.loader.callArg( 1 );
 
-				expect( error ).toHaveBeenCalled();
-				error.reset();
+				expect( error ).not.toHaveBeenCalled();
 				setTimeout( done( function() {
 					expect( success ).not.toHaveBeenCalled();
-					expect( error ).not.toHaveBeenCalled();
+					expect( error ).toHaveBeenCalled();
 				} ), 20 );
 			} );
 			
-			it( 'calls error callback on typekit not found', function( done ) {
+			it( 'calls error function on next event loop from typekit not found', function( done ) {
 				var success = this.spy();
 				var error = this.spy();
 				typekitLoad( '1a', success, error );
@@ -181,11 +180,10 @@ define( [ 'buster', '../load' ], function( buster, typekitLoad ) {
 				this.runtypekit.throws();
 				this.loader.callArg( 1 );
 
-				expect( error ).toHaveBeenCalled();
-				error.reset();
+				expect( error ).not.toHaveBeenCalled();
 				setTimeout( done( function() {
 					expect( success ).not.toHaveBeenCalled();
-					expect( error ).not.toHaveBeenCalled();
+					expect( error ).toHaveBeenCalled();
 				} ), 20 );
 			} );
 		} );
