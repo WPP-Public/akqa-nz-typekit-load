@@ -5,8 +5,7 @@ An asynchronous Typekit loader that gives you success and error callback functio
 This library is made to be as small as possible so it can be inlined into the head of your `<html>` tag to initialise the loading of your fonts before even your css loads. **typekit-load** depends on the [async-load](https://github.com/heyday/async-load) and [dom-class](https://github.com/heyday/dom-class) libraries, these will be automatically installed with bower or are included with the minified file.
 
 
-Quick Start
-===========
+## Quick Start
 
 Three options are available for getting the source:
 
@@ -33,8 +32,7 @@ Three options are available for getting the source:
 1. `typekit-load` will be available as `window.typekitLoad`
 
 
-API
-===========
+## API
 
 ```javascript
 typekitLoad( 'my-typekit-id', mySuccessFunction, myErrorFunction );
@@ -111,16 +109,15 @@ typekitLoad( 'my-typekit-id', mySuccessFunction, function() {
 } );
 ```
 
-Development
-===========
+## Development
 
-# Running the unit tests
+### Running the unit tests
 
 1. `npm install` - Install all required dev modules
 1. `npm install -g grunt-cli` - Install Grunt
 1. `grunt test` - Lints all files, and then runs the unit tests in a PhantomJS instance
 
-# Building the module locally
+### Building the module locally
 
 1. `npm install` - Install all required dev modules
 1. `npm install -g grunt-cli bower` - Install Grunt and Bower
