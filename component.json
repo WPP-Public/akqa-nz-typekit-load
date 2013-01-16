@@ -1,7 +1,7 @@
 {
   "name": "typekit-load",
   "version": "0.1.0",
-  "description": "An extremely miminal typekit loader",
+  "description": "An asynchronous typekit loader with smarts",
   "keywords": [ "typekit", "loader" ],
   "licenses": [
     {

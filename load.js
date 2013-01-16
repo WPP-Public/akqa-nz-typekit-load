@@ -1,7 +1,7 @@
-/** @license MIT License (c) copyright Heyday Digital */
+/** @license MIT License (c) Heyday Digital */
 
 /**
- * An extremely miminal typekit loader
+ * An asynchronous typekit loader with smarts
  *
  * Licensed under the MIT License at:
  * http://heyday.mit-license.org/
