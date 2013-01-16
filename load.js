@@ -107,7 +107,7 @@ define( [ 'async-load', 'dom-class' ], function( load, domClass ) {
 
 	/**
 	 * Timeout value, after this period an id is set to inactive
-	 * @type {Int}
+	 * @type {Int} Timeout in milliseconds
 	 */
 	typekitLoad.timeout = 2000;
 
