@@ -40,10 +40,14 @@ module.exports = function( grunt ) {
 	// Minify lib
 	config.uglify[ 'load' ] = {
 		options: {
-			preserveComments: 'some'
+			preserveComments: 'none'
 		},
 		files: {
-			'load.min.js': [ 'load.js' ]
+			'load.min.js': [
+				'components/async-load/load.js',
+				'components/dom-class/class.js',
+				'load.js'
+			]
 		}
 	};
 
