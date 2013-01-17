@@ -2,7 +2,7 @@
 
 An asynchronous Typekit loader that gives you success and error callback functions, styling hooks via classes on your HTML tag, and times out if the CDN goes down. **typekit-load** has a full unit test suite that passes in all popular browsers (and some not so popular browsers including IE6+), and is **under 720bytes** (including dependencies) when compiled with Uglify2 and gzipped.
 
-This library is made to be as small as possible so it can be inlined into the head of your `<html>` tag to initialise the loading of your fonts before even your css loads. **typekit-load** depends on the [async-load](https://github.com/heyday/async-load) and [dom-class](https://github.com/heyday/dom-class) libraries, these will be automatically installed with bower or are included with the minified file.
+This library is made to be as small as possible so it can be inlined into the head of your `<html>` tag to initialise the loading of your fonts before even your css loads. **typekit-load** depends on the [async-load](https://github.com/heyday/async-load) and [dom-class](https://github.com/heyday/dom-class) libraries, these will be automatically installed with Bower or are included with the minified file.
 
 
 ## Quick Start
