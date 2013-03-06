@@ -1,6 +1,7 @@
 {
   "name": "typekit-load",
   "version": "0.1.1",
+  "main": [ "load.js" ],
   "description": "An asynchronous typekit loader with smarts",
   "keywords": [ "typekit", "loader" ],
   "licenses": [
@@ -21,13 +22,12 @@
       "name": "Pieter Vanderwerff"
     }
   ],
-  "main": [ "load.js" ],
   "devDependencies": {
     "buster": "~0.6",
-    "buster-amd": "git://github.com/busterjs/buster-amd.git",
-    "requirejs": "",
-    "grunt": "~0.4",
-    "grunt-contrib-jshint": "~0.1.0",
+    "buster-amd": "~0.3.0",
+    "requirejs": "~2.1.0",
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.2.0",
     "grunt-plugin-buster": "~2.0.0",
     "grunt-contrib-uglify": "~0.1.1"
   },
