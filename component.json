@@ -1,8 +1,13 @@
 {
   "name": "typekit-load",
   "version": "0.1.0",
+  "main": [ "load.js" ],
   "description": "An asynchronous typekit loader with smarts",
   "keywords": [ "typekit", "loader" ],
+  "dependencies": {
+    "async-load": "~0.1.0",
+    "dom-class": "~0.1.0"
+  },
   "licenses": [
     {
       "type": "MIT",
@@ -21,9 +26,11 @@
       "name": "Pieter Vanderwerff"
     }
   ],
-  "main": [ "load.js" ],
-  "dependencies": {
-    "async-load": "0.1.x",
-    "dom-class": "0.1.x"
-  }
+  "ignore": [
+    "test/",
+    ".gitignore",
+    ".travis.yml",
+    "Gruntfile.js",
+    "package.json"
+  ]
 }
