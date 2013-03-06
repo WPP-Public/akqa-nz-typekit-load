@@ -1,6 +1,6 @@
 {
   "name": "typekit-load",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": [ "load.js" ],
   "description": "An asynchronous typekit loader with smarts",
   "keywords": [ "typekit", "loader" ],
