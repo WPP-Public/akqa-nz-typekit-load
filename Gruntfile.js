@@ -44,8 +44,8 @@ module.exports = function( grunt ) {
 		},
 		files: {
 			'load.min.js': [
-				'components/async-load/load.js',
-				'components/dom-class/class.js',
+				'bower_components/async-load/load.js',
+				'bower_components/dom-class/class.js',
 				'load.js'
 			]
 		}
