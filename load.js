@@ -40,8 +40,8 @@ define( [ 'async-load', 'dom-class' ], function( load, domClass ) {
 	/**
 	 * Download and initialise a typekit font(s) based on a typekit id
 	 * @param  {String} typekit_id Id of typekit font set to initialise
-	 * @param {Function} cb Success callback
-	 * @param {Fuction} er Error callback
+	 * @param {Function} [success] Success callback
+	 * @param {Function} [error] Error callback
 	 */
 	typekitLoad = function( typekit_id, success, error ) {
 		var onSuccess, onError;
@@ -70,7 +70,7 @@ define( [ 'async-load', 'dom-class' ], function( load, domClass ) {
 		};
 
 		/**
-		 * Initalize loading of JS file, wait for callback
+		 * Initialize loading of JS file, wait for callback
 		 */
 		load(
 			'//use.typekit.com/' + typekit_id + '.js',
@@ -99,7 +99,7 @@ define( [ 'async-load', 'dom-class' ], function( load, domClass ) {
 	typekitLoad._first = true;
 
 	/**
-	 * Interger which holds the current number of loading id's
+	 * Integer which holds the current number of loading id's
 	 * @type {Int}
 	 * @private
 	 */
